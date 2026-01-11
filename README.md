@@ -30,14 +30,14 @@ Then run:
 ```
 
 Knobs:
-- `--wordfreq-disabled`: disable wordfreq tokens (enabled by default).
-- `--wordfreq-list small|best|large`: choose the list size.
-  - `small`: most conservative; fewer rare or noisy tokens.
-  - `best`: balanced; fewer rare tokens than `large`.
-  - `large`: broadest; highest coverage, most noise.
-- `--no-intersection`: disable intersection mode (union instead). Intersection is on by default.
-- `--scowl-size`: SCOWL size parameter - min `35` (less noise words), max (more noise words) `95`.
-- `--scowl-no-filter`: disable SCOWL's default word filter (adds `--no-word-filter`).
+- `--wordfreq-disabled`: disable wordfreq tokens (enabled by default)
+- `--wordfreq-list small|best|large`: word usage frequency:
+  - `small`: most conservative; fewest rare/noisy words
+  - `best`: balanced; fewer rare words than `large`
+  - `large`: broadest; highest coverage, most noise
+- `--no-intersection`: disable intersection mode (union instead). Intersection is on by default
+- `--scowl-size`: SCOWL size parameter - min `35` (less noise words), max (more noise words) `95`
+- `--scowl-no-filter`: disable SCOWL's default word filter (increase noise words)
 
 ## Notes
 - `prep.sh` downloads SCOWL and installs wordfreq in `.venv`.
