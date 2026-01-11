@@ -1,5 +1,6 @@
 # Wordlist Builder
-Generate a reasonably comprehensive English word list (<= 15 letters) from SCOWL, Wiktionary, and wordfreq.
+Generate a reasonably comprehensive English word list (<= 15 letters) from SCOWL, Wiktionary, and wordfreq. 
+Then compare to already minted Handles to see which words are still available.
 
 ## What it does
 - Generates a list from a local SCOWL/SCOWLv2 repo. (https://github.com/en-wl/wordlist)
@@ -8,6 +9,8 @@ Generate a reasonably comprehensive English word list (<= 15 letters) from SCOWL
 - Optionally merges English entries from a wiktextract JSONL dump. (https://www.wiktionary.org/)
 - Keeps only words made of ASCII letters and hyphens (apostrophes are removed).
 - Counts punctuation toward the length limit (e.g., hyphens count).
+- Queries the Handles API for all minted Handles
+- Creates a list of unminted Handles from the generated word list
 
 ## Prep script
 ```sh
