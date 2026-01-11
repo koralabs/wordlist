@@ -10,22 +10,23 @@ Generate a reasonably comprehensive English word list (<= 15 letters) from SCOWL
 - Counts punctuation toward the length limit (e.g., hyphens count).
 
 ## Prep script
-```
+```sh
+# (Linux targeted)
 ./prep.sh
 ```
 
 Then run:
-```
+```sh
 ./.venv/bin/python make_wordlist.py
 ```
 
 ## Find unminted Handles
-```
+```sh
 ./.venv/bin/python compare_handles.py
 ```
 
 ## Tests
-```
+```sh
 ./.venv/bin/python -m unittest discover -s tests
 ```
 
