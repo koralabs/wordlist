@@ -1,75 +1,84 @@
 import re
 import json
 import sys
+import requests
 
 # ================================================
 # CONFIGURATION
 # ================================================
 
-WORDS_FILE = "t.words"          # Verbatim copy-paste of JS array from handle.me site from t.words = to },
-
-#[{
-#            word: "69",
-#            algorithms: ["suggestive"],
-#            position: "exact"
-#        }, {
-#            word: "zulu",
-#            algorithms: ["hatespeech"],
-#            position: "exact"
-#        }]
+WORDS_URL = "https://raw.githubusercontent.com/koralabs/kora-labs-common/refs/heads/master/src/protectedWords/protectedWords.ts"
 
 # ================================================
 # LOADING & CLEANING PROTECTED WORDS
 # ================================================
 
 def aggressive_js_to_json_clean(raw: str) -> str:
-    """Convert messy/minified JS array to valid JSON"""
-    raw = re.sub(r'^\s*(?:t\.)?words\s*=\s*', '', raw, flags=re.I)
-    raw = raw.strip()
+    """Convert messy/minified JS/TS array to valid JSON"""
 
-    if not (raw.startswith('[') and raw.endswith(']')):
-        raise ValueError("Array must start with [ and end with ]")
+    # 1. Remove all JS comments (// and /* */)
+    raw = re.sub(r'//.*', '', raw)
+    raw = re.sub(r'/\*.*?\*/', '', raw, flags=re.DOTALL)
 
-    # Quote unquoted keys
+    # 2. Find the start of the actual data array.
+    # We look for the first '[' that is followed by a '{' (the start of the first object)
+    match = re.search(r'\[\s*\{', raw)
+    if not match:
+        raise ValueError("Could not find the start of the word objects array")
+
+    start_index = match.start()
+    end_index = raw.rfind(']')
+
+    if start_index == -1 or end_index == -1:
+        raise ValueError("Could not find a valid array structure (missing [ or ])")
+
+    raw = raw[start_index:end_index + 1]
+
+    # 3. Clean up JS-isms to make it valid JSON
+    # Quote unquoted keys (word: -> "word":)
     raw = re.sub(r'([\{,]\s*)(\w+)(\s*:)', r'\1"\2":', raw)
-    # Single → double quotes
+    # Single quotes to double quotes
     raw = raw.replace("'", '"')
-    # JS booleans
+    # JS booleans !0/!1
     raw = raw.replace('!0', 'true').replace('!1', 'false')
-    # Trailing commas
+    # Remove trailing commas before closing braces/brackets
     raw = re.sub(r',\s*([}\]])', r'\1', raw)
-    # Normalize whitespace
+
+    # 4. Final whitespace normalization
     raw = ' '.join(raw.split())
 
     return raw
 
 
 def load_protected_words():
+    print(f"Fetching protected words from {WORDS_URL}...")
     try:
-        with open(WORDS_FILE, 'r', encoding='utf-8') as f:
-            raw = f.read().strip()
-    except FileNotFoundError:
-        print(f"Error: '{WORDS_FILE}' not found.")
+        response = requests.get(WORDS_URL, timeout=10)
+        response.raise_for_status() # Raise error for 404/500
+        raw = response.text.strip()
+    except Exception as e:
+        print(f"Error fetching online file: {e}")
         sys.exit(1)
 
     try:
         cleaned = aggressive_js_to_json_clean(raw)
         data = json.loads(cleaned)
         if not isinstance(data, list):
-            raise ValueError("Not a list")
-        print(f"Loaded {len(data)} protected words.")
+            raise ValueError("Parsed data is not a list")
+        print(f"Successfully loaded {len(data)} protected words.")
         return data
     except json.JSONDecodeError as e:
-        print("Parsing failed:", str(e))
-        print("Around error:", cleaned[max(0, e.pos-60):e.pos+60] + "...")
+        print("Parsing failed. The content might be too complex for the regex cleaner.")
+        print("Error snippet:", cleaned[max(0, e.pos-40):e.pos+40] + "...")
         sys.exit(1)
 
+PROTECTED_WORDS = []
 
-# Load once
 try:
     PROTECTED_WORDS = load_protected_words()
+
 except Exception as e:
-    print("Critical error:", str(e))
+    print(f"Critical error during initialization: {e}")
     sys.exit(1)
 
 # ================================================
