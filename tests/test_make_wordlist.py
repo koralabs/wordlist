@@ -59,12 +59,19 @@ class WordlistTests(unittest.TestCase):
         merged = merge_sources([{"a", "b"}, {"b", "c"}], intersection=True)
         self.assertEqual(merged, {"b"})
 
+    def test_merge_sources_empty(self):
+        self.assertEqual(merge_sources([], intersection=False), set())
+
     def test_iter_wordlist_file_skips_blank(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             path = Path(tmpdir) / "list.txt"
             path.write_text("alpha\n\nbeta\n", encoding="utf-8")
             words = list(iter_wordlist_file(path))
             self.assertEqual(words, ["alpha", "beta"])
+
+    def test_filter_words_skips_empty_tokens(self):
+        result = filter_words({"", "  ", "Alpha"}, max_len=10)
+        self.assertEqual(result, ["alpha"])
 
     def test_iter_wiktextract_jsonl_filters_lang(self):
         with tempfile.TemporaryDirectory() as tmpdir:

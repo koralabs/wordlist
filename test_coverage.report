@@ -1,11 +1,37 @@
-...
+FORMAT_VERSION=1
+REPO=wordlist
+TIMESTAMP_UTC=2026-02-22T20:58:51Z
+THRESHOLD_LINES=90
+THRESHOLD_BRANCHES=90
+TOTAL_LINES_PCT=98.49
+TOTAL_BRANCHES_PCT=90.91
+STATUS=partial
+SOURCE_PATHS=make_wordlist.py;compare_handles.py
+EXCLUDED_PATHS=prep.sh:bash-runtime-script-with-non-measurable-line-branch-coverage-in-current-toolchain; docs/**:documentation-content; tests/**:test-code; coverage_guardrail.py:removed-synthetic-artifact
+LANGUAGE_SUMMARY=python:lines=98.49,branches=90.91,tool=coverage.py,status=pass;bash:lines=NA,branches=NA,tool=unittest-script-check,status=na
+
+=== RAW_OUTPUT_PYTHON_UNITTEST ===
+..........................scowl failed
+.wordfreq failed
+.....
 ----------------------------------------------------------------------
-Ran 3 tests in 0.000s
+Ran 32 tests in 0.006s
 
 OK
-Name                    Stmts   Miss Branch BrPart  Cover   Missing
--------------------------------------------------------------------
-coverage_guardrail.py      18      0     10      0   100%
--------------------------------------------------------------------
-TOTAL                      18      0     10      0   100%
-Coverage threshold met (line=100.00%, branch=100.00%).
+
+=== RAW_OUTPUT_PYTHON_COVERAGE_RUN ===
+..........................scowl failed
+.wordfreq failed
+.....
+----------------------------------------------------------------------
+Ran 32 tests in 0.012s
+
+OK
+
+=== RAW_OUTPUT_PYTHON_COVERAGE_REPORT ===
+Name                 Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------
+compare_handles.py      59      1     14      1    97%   58
+make_wordlist.py       140      2     52      5    96%   29, 37->26, 158, 161->163, 193->195
+----------------------------------------------------------------
+TOTAL                  199      3     66      6    97%

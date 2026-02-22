@@ -19,4 +19,8 @@
 ## Testing and Coverage
 - Unit tests use unittest modules under `tests/`.
 - Coverage guardrail script bootstraps isolated tooling in `.venv_coverage`.
-- Guardrail threshold: >=90% line and branch coverage.
+- Guardrail threshold: >=90% line and branch coverage for measurable Python runtime scope.
+- Current measured scope:
+  - `make_wordlist.py`
+  - `compare_handles.py`
+- Bash workflow script `prep.sh` is validated through unit tests and reported as `NA` for line/branch metrics in `test_coverage.report`.

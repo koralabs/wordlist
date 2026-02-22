@@ -27,6 +27,13 @@ class CompareHandlesTests(unittest.TestCase):
             words = load_english_words(path, max_len=5)
             self.assertEqual(words, {"re-do", "abcde"})
 
+    def test_load_english_words_skips_blank_and_over_length(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "english.txt"
+            path.write_text("\nokay\ntoolongword\n", encoding="utf-8")
+            words = load_english_words(path, max_len=5)
+            self.assertEqual(words, {"okay"})
+
     def test_get_handles_text_uses_cache(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             cache_path = Path(tmpdir) / "handles.txt"
