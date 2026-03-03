@@ -208,3 +208,6 @@ marimo/_lsp/
 __marimo__/
 
 sources
+
+# K.O.R.A executor logs
+.kora/executor-logs/
