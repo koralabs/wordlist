@@ -3,7 +3,8 @@
 ## Summary
 `wordlist` builds and filters English word candidates for Handle availability analysis. It produces:
 - a normalized candidate word list (`wordlist.txt`),
-- a diff list of words not present in minted Handles (`unminted_handles.txt`).
+- a diff list of words not present in minted Handles (`unminted_handles.txt`),
+- an offline protected-policy classification table for candidate handles.
 
 ## Problem
 Handle discovery/analysis workflows need a deterministic, reproducible way to generate high-signal word candidates from multiple lexical sources and compare them against minted Handle inventories.
@@ -34,6 +35,13 @@ Handle discovery/analysis workflows need a deterministic, reproducible way to ge
   - compute and write missing handles file.
 - `prep.sh`:
   - bootstrap local environment (venv, dependencies, SCOWL source).
+- `check_badword.py` / `check_badword.cjs`:
+  - classify a UTF-8 candidate file with the actual shared protected-word engine,
+  - report allowed, protected and invalid candidates distinctly,
+  - identify the pinned offline policy package/version,
+  - never substitute a partial Python algorithm or downloaded raw list for canonical policy.
+
+Policy results describe the installed package's dataset at that version. They neither query minted inventory nor establish current policy, on-chain availability or a reservation. Updating the policy package is an explicit dependency change with renewed behavior tests; no automatic live-list fetch.
 
 ## Success Criteria
 - Unit tests pass via unittest discover.

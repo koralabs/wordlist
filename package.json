@@ -1,0 +1,8 @@
+{
+  "name": "wordlist-policy-cli",
+  "version": "0.0.0",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "dependencies": { "@koralabs/kora-labs-common": "6.9.3" },
+  "scripts": { "test": "node --test tests/check_badword.test.cjs" }
+}

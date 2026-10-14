@@ -211,3 +211,7 @@ sources
 
 # K.O.R.A executor logs
 .kora/executor-logs/
+
+# Retained local test evidence
+tmp/
+node_modules/

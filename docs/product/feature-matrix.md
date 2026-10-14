@@ -7,5 +7,6 @@
 | Source merging | Intersection/union merge behavior | `make_wordlist.py` |
 | Normalization/filtering | Lowercasing, apostrophe stripping, token regex, max-length filtering | `make_wordlist.py` |
 | Handles comparison | Fetch/cached handles text and diff against generated words | `compare_handles.py` |
+| Offline protected policy | Canonical packaged policy classification, not minting availability | `check_badword.py`, `check_badword.cjs`, `package.json` |
 | Guardrail logic | Deterministic helper branch/line coverage target | `coverage_guardrail.py`, `tests/test_coverage_guardrail.py` |
 | Coverage enforcement | Automated branch+line threshold script and artifact | `test_coverage.sh`, `test_coverage.report` |
