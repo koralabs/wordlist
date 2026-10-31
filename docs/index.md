@@ -10,3 +10,6 @@
 - [Spec Index](./spec/index.md)
 - [Technical Spec](./spec/spec.md)
 - [CLI and Data Contracts](./spec/cli-and-data-contracts.md)
+
+## Policy proposals (not active)
+- [Canonical contract and enclave draft](./proposals/phase5-wordlist/README.md): operator review required.
