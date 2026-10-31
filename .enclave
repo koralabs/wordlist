@@ -1,0 +1,10 @@
+# wordlist: exact repo-root-relative paths, one per line. These files decide which words are checked as blocked or allowed.
+.enclave
+CANONICAL_CONTRACT.md
+check_badword.cjs
+check_badword.py
+make_wordlist.py
+compare_handles.py
+package.json
+wordlist.txt
+unminted_handles.txt
