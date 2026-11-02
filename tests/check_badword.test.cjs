@@ -51,7 +51,7 @@ for (const runtime of ['node', 'python3']) {
         assert.equal(result.status, 0, result.stderr);
         const rows = result.stdout.trim().split('\n');
         assert.equal(rows.length, 10);
-        assert.equal(rows[0], 'Offline policy: @koralabs/kora-labs-common@6.9.3; OK does not mean unminted or reservable.');
+        assert.equal(rows[0], 'Offline policy: @koralabs/kora-labs-common@6.21.6; OK does not mean unminted or reservable.');
         assert.equal(rows[1], 'HANDLE\tSTATUS\tREASON');
         assert.deepEqual(rows.slice(2).map(row => row.split('\t').slice(0, 2)), [
             ['s.h.i.t', 'FLAGGED'], ['punchbabies', 'FLAGGED'], ['pu55y', 'FLAGGED'], ['tinypreteenpp', 'FLAGGED'],
@@ -96,7 +96,7 @@ test('missing file, unknown option, wrong version and dependency errors', () => 
     const wrong = path.join(evidence, 'wrong-package');
     fs.mkdirSync(wrong);
     fs.writeFileSync(path.join(wrong, 'package.json'), JSON.stringify({ name: '@koralabs/kora-labs-common', version: '6.9.2' }));
-    assert.throws(() => loadPolicy(wrong), /must be @koralabs\/kora-labs-common@6.9.3/);
+    assert.throws(() => loadPolicy(wrong), /must be @koralabs\/kora-labs-common@6.21.6/);
     const input = path.join(evidence, 'empty.txt');
     fs.writeFileSync(input, '\n');
     for (const [args, message] of [

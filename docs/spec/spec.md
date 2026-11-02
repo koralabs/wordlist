@@ -4,7 +4,7 @@
 - `make_wordlist.py`: source collection, normalization, filtering, merge, and output generation.
 - `compare_handles.py`: handles API fetch/cache + set-diff output pipeline.
 - `prep.sh`: environment bootstrapping and SCOWL source provisioning.
-- `check_badword.cjs`: offline CLI input validation and direct calls to `ProtectedWords.checkAvailability` from `@koralabs/kora-labs-common@6.9.3`; no copied policy or raw-list parsing.
+- `check_badword.cjs`: offline CLI input validation and direct calls to `ProtectedWords.checkAvailability` from `@koralabs/kora-labs-common@6.21.6`; no copied policy or raw-list parsing.
 - `check_badword.py`: compatibility launcher for that Node CLI, preserving arguments, output and exit code.
 
 The canonical engine performs the actual number replacement, morphology, composition and contextual exception decisions. The CLI validates its documented 1–15-character ASCII candidate format before lowercasing and losslessly JSON-string-escapes output fields before joining the three-column table. It does not alter the canonical dataset or implement its own matching rules. Require Node.js 20+; resolve the installed package normally or use the explicit `--common-package` directory. Reject a missing/wrong-name/wrong-version package rather than guessing a fallback. No classification path performs HTTP.

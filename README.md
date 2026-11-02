@@ -13,7 +13,7 @@ Generate an English candidate word list, compare it against minted Handles, and 
 - `./.venv/bin/python compare_handles.py`
 
 ## Offline Protected-Policy Check
-Requires Node.js 20+ and `@koralabs/kora-labs-common@6.9.3` (declared in `package.json`). Reuse an installed package without fetching anything:
+Requires Node.js 20+ and `@koralabs/kora-labs-common@6.21.6` (declared in `package.json`). Reuse an installed package without fetching anything:
 
 ```bash
 python3 check_badword.py unminted_handles.txt --common-package /path/to/node_modules/@koralabs/kora-labs-common

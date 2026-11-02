@@ -23,7 +23,7 @@
 `python3 check_badword.py <handles_file.txt> [--common-package <directory>]`
 or `node check_badword.cjs` with identical arguments. `--help` prints usage.
 
-- Node.js 20+; canonical API `ProtectedWords.checkAvailability` in `@koralabs/kora-labs-common@6.9.3`. `package.json` pins that exact package version. Use an existing package directory or provision the declared dependency separately; the CLI does not install or fetch it.
+- Node.js 20+; canonical API `ProtectedWords.checkAvailability` in `@koralabs/kora-labs-common@6.21.6`. `package.json` pins that exact package version. Use an existing package directory or provision the declared dependency separately; the CLI does not install or fetch it.
 - Default lookup uses Node's installed-package resolution. The explicit directory must contain that package's `package.json` and built `protectedWords` entry. Missing/wrong-version packages are errors.
 - Input: UTF-8, one candidate per line. Trim surrounding whitespace, omit blank lines, lowercase only for classification; preserve the trimmed original spelling in output.
 - Candidate format: 1–15 characters, ASCII uppercase/lowercase letters/digits/underscore/dot/hyphen. Validate the trimmed original before lowercasing for policy; Unicode lookalikes such as the Kelvin sign remain `INVALID`. Other inputs receive `INVALID` without policy lookup. This is candidate format, not the complete on-chain Handle grammar.

@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { parseArgs } = require('node:util');
 const PACKAGE = '@koralabs/kora-labs-common';
-const VERSION = '6.9.3';
+const VERSION = '6.21.6';
 
 function loadPolicy(packageDirectory) {
     const manifest = packageDirectory
